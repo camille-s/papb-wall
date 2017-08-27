@@ -2,20 +2,20 @@ import React from 'react';
 import { Col } from 'react-bootstrap';
 import LinkList from './LinkList';
 
+import '../styles/Card.css';
+
 export default class Card extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            expanded: false
-        };
-    }
+    // might add state if we want to expand cards
     render() {
+        let name = <span>{this.props.firstName} {this.props.lastName}</span>;
+        let age = this.props.age.length ? `, ${this.props.age}` : '';
+
         return (
-            <Col md={4} sm={6} className="card">
-                <h2 className="text-uppercase">{this.props.first_name} {this.props.last_name}, {this.props.age}</h2>
+            <Col md={4} sm={6} className="Card">
+                <h2 className="text-uppercase">{name}{age}</h2>
                 <h4 className="where">{this.props.location} | {this.props.datestring}</h4>
                 {/* will have element for photo */}
-                <p className="blurb">{this.props.what}</p>
+                <p className="blurb">{this.props.blurb}</p>
 
                 <LinkList links={this.props.linkset} />
             </Col>

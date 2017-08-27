@@ -16,9 +16,17 @@ export default class CityForm extends React.Component {
 
         return (
             <Grid>
+                <Form horizontal onChange={this.handleSearch}>
+                    <FormGroup controlId="searchBox">
+                        <Col componentClass={ControlLabel} md={2}>Search</Col>
+                        <Col md={10}>
+                            <FormControl type="text" value={this.props.searchText} placeholder="Search case info..." />
+                        </Col>
+                    </FormGroup>
+                </Form>
                 <Form horizontal onChange={this.handleChange}>
                     <FormGroup controlId="citySelect">
-                        <Col componentClass={ControlLabel} md={2}>Filter</Col>
+                        <Col componentClass={ControlLabel} md={2}>Filter by city</Col>
                         <Col md={10}>
                             <FormControl componentClass="select" name="city" value={this.props.city}>
                                 <option value="">Show all</option>
@@ -35,21 +43,8 @@ export default class CityForm extends React.Component {
                         </Col>
                     </FormGroup>
                 </Form>
-                {/* <Form horizontal onChange={this.handleSearch}>
-                    <FormGroup controlId="searchBox">
-                        <Col componentClass={ControlLabel} md={2}></Col>
-                        <Col md={10}>
-                            <FormControl type="text" value={this.props.searchText} />
-                        </Col>
-                    </FormGroup>
-                </Form> */}
+
             </Grid>
-
-            // <select className="select" value={this.props.city} onChange={this.props.handleSelectChange.bind(this)}>
-            //     <option value="">Show all</option>
-            //     {options}
-            // </select>
-
         )
     }
 }

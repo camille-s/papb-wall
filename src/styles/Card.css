@@ -1,0 +1,35 @@
+.Card {
+    padding: 20px;
+    border: 6px solid white;
+    border-radius: 12px;
+    background: #eee;
+    color: #333;
+    min-height: 320px;
+}
+
+.Card h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+.Card h4 {
+    font-size: 1.4em;
+}
+
+.Card ul {
+    padding-left: 20px;
+}
+
+.Case-grid .Card {
+    transform: translateY(100%);
+    animation: slideUp 0.6s ease forwards;
+}
+
+@keyframes slideUp {
+    0% {
+
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

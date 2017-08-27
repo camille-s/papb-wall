@@ -1,14 +1,17 @@
-.card {
-  padding: 20px;
-  border: 6px solid white;
-  border-radius: 12px;
-  background: #eee;
-  color: #333;
-  min-height: 320px; }
-  .card h2 {
-    font-size: 1.4em;
-    font-weight: 600; }
-  .card ul {
-    padding-left: 20px; }
+div.App a {
+    color: #a7056b;
+}
 
-/*# sourceMappingURL=App.css.map */
+div.App a:hover {
+    color: #6f0853;
+}
+
+div.intro {
+    font-size: 11pt;
+    max-width: 960px;
+    margin-left: 0;
+}
+
+.intro h1 {
+    font-size: 2.5em;
+}
