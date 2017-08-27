@@ -1,7 +1,7 @@
 {
   "name": "papb-wall",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "bootstrap": "^3.3.7",
     "d3-queue": "^3.0.7",
