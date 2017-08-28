@@ -52,21 +52,23 @@ class App extends Component {
             // .await(function(error, datacsv, coordjson) {
             .await(function(error, datacsv) {
                 if (error) { throw error; }
-                console.log(datacsv);
 
-                let cleaned = datacsv.filter(function(d) { return d.approved && d.approved.length; });
+                // let cleaned = datacsv.filter(function(d) { return d.approved && d.approved.length; });
+                let cleaned = _.filter(datacsv, function(d) { return d.approved && d.approved.length; });
+
                 cleaned.forEach(function(d) {
-                        d.datestring = `${d.month}/${d.day}/${d.year}`;
-                        d.date = new Date(d.datestring);
-                        d.linkset = _.zip(
-                                d.headline.split(';'),
-                                d.link.split(';'),
-                                d.pub.split(';')
-                            ).map(function(l) {
-                                return { headline: l[0], link: l[1], pub: l[2] };
-                            });
-                        d.location = d.location.trim();
-                        d.longstring = [ d.firstName, d.lastName, d.location, d.headline, d.pub, d.blurb, d.date ].join(' ').toLowerCase();
+                    d.datestring = `${d.month}/${d.day}/${d.year}`;
+                    d.date = new Date(d.datestring);
+                    d.linkset = _.zip(
+                            d.headline.split(';'),
+                            d.link.split(';'),
+                            d.pub.split(';')
+                        ).map(function(l) {
+                            return { headline: l[0], link: l[1], pub: l[2] };
+                        });
+                    d.location = d.location.trim();
+                    // use d.datestring for searching instead of d.date---d.date should be for sorting, etc
+                    d.longstring = [ d.firstName, d.lastName, d.location, d.headline, d.pub, d.blurb, d.datestring ].join(' ').toLowerCase();
                 });
 
                 let sorted = _.sortBy(cleaned, 'date').reverse();
@@ -82,6 +84,8 @@ class App extends Component {
                     data: sorted,
                     cities: cities
                 });
+
+                console.log(cleaned);
             });
     }
 
@@ -93,7 +97,7 @@ class App extends Component {
         } else if (order === 'byOldest') {
             sorted = _.sortBy(data, 'date');
         } else {
-            sorted = _.sortBy(data, 'last_name');
+            sorted = _.sortBy(data, 'lastName');
         }
         return sorted;
     }
@@ -146,14 +150,12 @@ class App extends Component {
                 </div>
                 {/* <Map data={this.state.data}></Map> */}
                 {/* <Select data={this.state.data} /> */}
-                {/* <Grid data={this.state.data} /> */}
                 <CityForm cities={this.state.cities}
                     city={this.state.city}
                     order={this.state.order}
                     handleChange={this.handleChange}
                     handleSearch={this.handleSearch}
                 />
-                {/* <Form2 data={this.state.data}></Form2> */}
                 <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
             </div>
         );
