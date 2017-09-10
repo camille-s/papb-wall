@@ -1,94 +1,34 @@
-import React, { Component } from 'react';
-import { csv, text } from 'd3-request';
-import { queue } from 'd3-queue';
+import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
 
-// import Grid from './components/Grid';
 import CaseGrid from './components/CaseGrid';
 import CityForm from './components/CityForm';
-// import Map from './components/Map';
+
 import './App.css';
 
-var masonryOpts = {
-    // stagger: 50,
+const masonryOpts = {
+    // stagger?
     transitionDuration: 0
 };
 
-class App extends Component {
+export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            initData: [],
-            cities: [],
             city: '',
             order: 'byNewest',
-            searchText: '',
-            introTxt: ''
+            searchText: ''
         };
+
     }
 
     componentDidMount() {
-        let cmp = this;
-        this.loadData(cmp);
-        this.loadText(cmp);
-    }
-
-    loadText(component) {
-        text(this.props.intro, function(txt) {
-            component.setState({ introTxt: txt });
+        this.setState({
+            data: this.props.initData
         });
     }
-
-    setTextBlock(text) {
-        console.log(text);
-    }
-
-    loadData(component) {
-        queue()
-            .defer(csv, this.props.dataUrl)
-            // .defer(json, 'data/coordinates.geojson')
-            // .await(function(error, datacsv, coordjson) {
-            .await(function(error, datacsv) {
-                if (error) { throw error; }
-
-                // let cleaned = datacsv.filter(function(d) { return d.approved && d.approved.length; });
-                let cleaned = _.filter(datacsv, function(d) { return d.approved && d.approved.length; });
-
-                cleaned.forEach(function(d) {
-                    d.datestring = `${d.month}/${d.day}/${d.year}`;
-                    d.date = new Date(d.datestring);
-                    d.linkset = _.zip(
-                            d.headline.split(';'),
-                            d.link.split(';'),
-                            d.pub.split(';')
-                        ).map(function(l) {
-                            return { headline: l[0], link: l[1], pub: l[2] };
-                        });
-                    d.location = d.location.trim();
-                    // use d.datestring for searching instead of d.date---d.date should be for sorting, etc
-                    d.longstring = [ d.firstName, d.lastName, d.location, d.headline, d.pub, d.blurb, d.datestring ].join(' ').toLowerCase();
-                });
-
-                let sorted = _.sortBy(cleaned, 'date').reverse();
-
-                let cities = _.chain(sorted)
-                    .pluck('location')
-                    .uniq()
-                    .sort()
-                    .value();
-
-                component.setState({
-                    initData: sorted,
-                    data: sorted,
-                    cities: cities
-                });
-
-                console.log(cleaned);
-            });
-    }
-
 
     sortData(data, order) {
         let sorted;
@@ -103,12 +43,11 @@ class App extends Component {
     }
 
     filterData(data, city) {
-        let filtered = city.length ? _.filter(data, function(d) { return d.location === city; }) : data;
-        return filtered;
+        return city.length ? _.filter(data, (d) => d.location === city ) : data;
     }
 
     sortnFilter(city, order) {
-        let sorted = this.sortData(this.state.initData, order);
+        let sorted = this.sortData(this.props.initData, order);
         let filtered = this.filterData(sorted, city);
         return filtered;
     }
@@ -130,27 +69,23 @@ class App extends Component {
 
     handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
-        console.log(query);
         let unfiltered = this.sortnFilter(this.state.city, this.state.order);
-
-        let filtered = query.length ? _.filter(unfiltered, function(d) { return d.longstring.indexOf(query) !== -1; }) : unfiltered;
+        let filtered = query.length ? _.filter(unfiltered, (d) => d.longstring.indexOf(query) !== -1) : unfiltered;
         this.setState({
             data: filtered
         });
     }
 
     render() {
+        console.log(this.state.data);
         return (
             <div className="App">
-                {/* <ReactMarkdown source={opening} /> */}
                 <div className="container">
                     <div className="intro">
-                        <ReactMarkdown source={this.state.introTxt} />
+                        <ReactMarkdown source={this.props.intro} />
                     </div>
                 </div>
-                {/* <Map data={this.state.data}></Map> */}
-                {/* <Select data={this.state.data} /> */}
-                <CityForm cities={this.state.cities}
+                <CityForm cities={this.props.cities}
                     city={this.state.city}
                     order={this.state.order}
                     handleChange={this.handleChange}
@@ -160,7 +95,4 @@ class App extends Component {
             </div>
         );
     }
-
 }
-
-export default App;

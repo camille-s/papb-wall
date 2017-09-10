@@ -1,6 +1,5 @@
 import React from 'react';
 import { Form, Grid, FormGroup, ControlLabel, FormControl, Col, Radio } from 'react-bootstrap';
-import * as _ from 'underscore';
 
 export default class CityForm extends React.Component {
     constructor(props) {
@@ -11,7 +10,7 @@ export default class CityForm extends React.Component {
 
     render() {
         let options = this.props.cities.map((d) => {
-            return <option value={d} key={_.uniqueId()}>{d}</option>;
+            return <option value={d} key={d}>{d}</option>;
         });
 
         return (
