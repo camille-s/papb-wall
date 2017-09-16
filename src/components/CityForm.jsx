@@ -25,7 +25,7 @@ export default class CityForm extends React.Component {
                 </Form>
                 <Form horizontal onChange={this.handleChange}>
                     <FormGroup controlId="citySelect">
-                        <Col componentClass={ControlLabel} md={2}>Filter by city</Col>
+                        <Col componentClass={ControlLabel} md={2}>Filter by department</Col>
                         <Col md={10}>
                             <FormControl componentClass="select" name="city" value={this.props.city}>
                                 <option value="">Show all</option>

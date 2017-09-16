@@ -43,7 +43,7 @@ export default class App extends React.Component {
     }
 
     filterData(data, city) {
-        return city.length ? _.filter(data, (d) => d.location === city ) : data;
+        return city.length ? _.filter(data, (d) => d.department === city ) : data;
     }
 
     sortnFilter(city, order) {

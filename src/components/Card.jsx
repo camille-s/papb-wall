@@ -13,7 +13,7 @@ export default class Card extends React.Component {
         return (
             <Col md={4} sm={6} className="Card">
                 <h2 className="text-uppercase">{name}{age}</h2>
-                <h4 className="where">{this.props.location} | {this.props.datestring}</h4>
+                <h4 className="where">{this.props.department} | {this.props.datestring}</h4>
                 {/* will have element for photo */}
                 <p className="blurb">{this.props.blurb}</p>
 

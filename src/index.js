@@ -31,15 +31,15 @@ queue()
                 ).map(function(l) {
                     return { headline: l[0], link: l[1], pub: l[2] };
                 });
-            d.location = d.location.trim();
-            d.longstring = [ d.firstName, d.lastName, d.location, d.headline, d.pub, d.blurb, d.datestring ]
+            d.department = d.department.trim();
+            d.longstring = [ d.firstName, d.lastName, d.department, d.headline, d.pub, d.blurb, d.datestring ]
                 .join(' ')
                 .toLowerCase();
         });
         let sorted = _.sortBy(cleaned, 'date').reverse();
 
         let cities = _.chain(sorted)
-            .pluck('location')
+            .pluck('department')
             .uniq()
             .sort()
             .value();
