@@ -2,10 +2,13 @@ import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
 
+import { loadData } from './components/DataLoader';
 import CaseGrid from './components/CaseGrid';
 import CityForm from './components/CityForm';
 
 import './App.css';
+
+
 
 const masonryOpts = {
     // stagger?
@@ -17,17 +20,27 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             data: [],
+            // cities: [],
             city: '',
             order: 'byNewest',
-            searchText: ''
+            searchText: '',
+            // intro: ''
         };
 
+    }
+
+    componentWillMount() {
+        // loadData(data => this.setState(data));
     }
 
     componentDidMount() {
         this.setState({
             data: this.props.initData
         });
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.data);
     }
 
     sortData(data, order) {
@@ -77,7 +90,6 @@ export default class App extends React.Component {
     }
 
     render() {
-        console.log(this.state.data);
         return (
             <div className="App">
                 <div className="container">
