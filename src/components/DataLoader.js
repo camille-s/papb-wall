@@ -5,7 +5,7 @@ import * as _ from 'underscore';
 
 import textUrl from '../content/opening-text.md';
 
-const dataUrl = '../data/dash.csv';
+const dataUrl = './data/dash.csv';
 
 // export
 // export const loadData = (dataUrl, textUrl, callback = _.noop) => {

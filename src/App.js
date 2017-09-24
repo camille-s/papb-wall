@@ -2,7 +2,6 @@ import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
 
-import { loadData } from './components/DataLoader';
 import CaseGrid from './components/CaseGrid';
 import CityForm from './components/CityForm';
 

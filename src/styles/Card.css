@@ -5,15 +5,23 @@
     background: #eee;
     color: #333;
     min-height: 320px;
+    float: left;
 }
 
 .Card h2 {
-    font-size: 1.6em;
+    font-size: 1.8em;
     font-weight: 700;
 }
 
 .Card h4 {
-    font-size: 1.4em;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+.Card h5 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #5f5f5f;
 }
 
 .Card ul {
@@ -32,4 +40,16 @@
     100% {
         transform: translateY(0);
     }
+}
+
+.Card .link-slider {
+    height: 100%;
+}
+
+.Card .linklist-open {
+    /*height: 200px;*/
+}
+
+.Card .linklist-closed {
+
 }
