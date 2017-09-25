@@ -2,7 +2,7 @@
   "name": "papb-wall",
   "version": "0.1.0",
   "private": false,
-  "homepage": "https://camille-s.github.io/papb-wall",
+  "homepage": "https://database.nhvcrb.org",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "d3-queue": "^3.0.7",
