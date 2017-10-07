@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Grid, FormGroup, ControlLabel, FormControl, Col, Radio } from 'react-bootstrap';
+import { Form, FormGroup, ControlLabel, FormControl, Col, Radio } from 'react-bootstrap';
 
 export default class CityForm extends React.Component {
     constructor(props) {
@@ -14,19 +14,19 @@ export default class CityForm extends React.Component {
         });
 
         return (
-            <Grid>
+            <div>
                 <Form horizontal onChange={this.handleSearch}>
                     <FormGroup controlId="searchBox">
-                        <Col componentClass={ControlLabel} md={2}>Search</Col>
-                        <Col md={10}>
+                        <Col componentClass={ControlLabel} sm={4} md={3}>Search</Col>
+                        <Col sm={8} md={9}>
                             <FormControl type="text" value={this.props.searchText} placeholder="Search case info..." />
                         </Col>
                     </FormGroup>
                 </Form>
                 <Form horizontal onChange={this.handleChange}>
                     <FormGroup controlId="citySelect">
-                        <Col componentClass={ControlLabel} md={2}>Filter by department</Col>
-                        <Col md={10}>
+                        <Col componentClass={ControlLabel} sm={4} md={3}>Filter by department</Col>
+                        <Col sm={8} md={9}>
                             <FormControl componentClass="select" name="city" value={this.props.city}>
                                 <option value="">Show all</option>
                                 {options}
@@ -34,8 +34,8 @@ export default class CityForm extends React.Component {
                         </Col>
                     </FormGroup>
                     <FormGroup controlId="sortRadio">
-                        <Col componentClass={ControlLabel} md={2}>Sort</Col>
-                        <Col md={10}>
+                        <Col componentClass={ControlLabel} sm={4} md={3}>Sort</Col>
+                        <Col sm={8} md={9}>
                             <Radio name="order" value="byNewest" inline checked={this.props.order === "byNewest"} onChange={this.handleChange}>By date: newest</Radio>
                             <Radio name="order" value="byOldest" inline checked={this.props.order === "byOldest"} onChange={this.handleChange}>By date: oldest</Radio>
                             <Radio name="order" value="byName" inline checked={this.props.order === "byName"} onChange={this.handleChange}>By name</Radio>
@@ -43,7 +43,7 @@ export default class CityForm extends React.Component {
                     </FormGroup>
                 </Form>
 
-            </Grid>
-        )
+            </div>
+        );
     }
 }

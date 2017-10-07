@@ -15,6 +15,6 @@ import './index.css';
 loadData((data) => {
     ReactDOM.render(<App {...data} />, document.getElementById('root'));
 });
-
+// ReactDOM.render(<App />, document.getElementById('root'));
 
 registerServiceWorker();

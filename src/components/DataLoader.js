@@ -7,7 +7,6 @@ import textUrl from '../content/opening-text.md';
 
 const dataUrl = './data/dash.csv';
 
-// export
 // export const loadData = (dataUrl, textUrl, callback = _.noop) => {
 export const loadData = (callback = _.noop) => {
     queue()
@@ -28,9 +27,7 @@ export const loadData = (callback = _.noop) => {
 };
 
 
-
-
-
+/////////// don't need to export these functions
 
 const splitLinks = (d) => {
     let linkset = _.zip(

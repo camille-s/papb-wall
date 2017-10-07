@@ -1,13 +1,12 @@
 import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
+import { Grid } from 'react-bootstrap';
 
-import CaseGrid from './components/CaseGrid';
+import { CaseGrid } from './components/CaseGrid';
 import CityForm from './components/CityForm';
 
 import './App.css';
-
-
 
 const masonryOpts = {
     // stagger?
@@ -18,7 +17,7 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
+            data: props.initData,
             // cities: [],
             city: '',
             order: 'byNewest',
@@ -29,13 +28,12 @@ export default class App extends React.Component {
     }
 
     componentWillMount() {
-        // loadData(data => this.setState(data));
+        // loadData((data) => this.setState(data));
+
     }
 
     componentDidMount() {
-        this.setState({
-            data: this.props.initData
-        });
+
     }
 
     componentDidUpdate() {
@@ -91,18 +89,19 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="App">
-                <div className="container">
+                <Grid>
                     <div className="intro">
                         <ReactMarkdown source={this.props.intro} />
                     </div>
-                </div>
-                <CityForm cities={this.props.cities}
-                    city={this.state.city}
-                    order={this.state.order}
-                    handleChange={this.handleChange}
-                    handleSearch={this.handleSearch}
-                />
-                <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
+                    <CityForm cities={this.props.cities}
+                        city={this.state.city}
+                        order={this.state.order}
+                        handleChange={this.handleChange}
+                        handleSearch={this.handleSearch}
+                    />
+
+                    <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
+                </Grid>
             </div>
         );
     }

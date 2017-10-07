@@ -5,7 +5,8 @@
     background: #eee;
     color: #333;
     min-height: 320px;
-    float: left;
+    transform: translateY(100%);
+    animation: slideUp 0.4s ease forwards;
 }
 
 .Card h2 {
@@ -26,11 +27,6 @@
 
 .Card ul {
     padding-left: 20px;
-}
-
-.Card {
-    transform: translateY(100%);
-    animation: slideUp 0.4s ease forwards;
 }
 
 @keyframes slideUp {
