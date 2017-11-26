@@ -1,0 +1,15 @@
+/*.CaseGrid .masonry-grid {
+    display: flex;
+    margin-left: -20px;
+}
+
+.CaseGrid .masonry-col {
+    flex: 1;
+    min-width: 0;
+    border-left: 20px solid transparent;
+    background-clip: padding-box;
+}
+
+.CaseGrid .masonry-col > div {
+    margin-bottom: 20px;
+}*/
