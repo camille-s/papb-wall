@@ -1,6 +1,7 @@
 // data handler -- from react d3 book
 import { csv, text } from 'd3-request';
 import { queue } from 'd3-queue';
+import { format } from 'd3-format';
 import * as _ from 'underscore';
 
 import textUrl from '../content/opening-text.md';
@@ -29,8 +30,7 @@ export const loadData = (callback = _.noop) => {
 
 
 
-
-
+const pad = (s) => format('02')(s);
 
 const splitLinks = (d) => {
     let linkset = _.zip(
@@ -47,7 +47,7 @@ const cleanData = (data) => {
     return _.chain(data)
         .filter((d) => d.approved && d.approved.length)
         .map((d) => {
-            let datestring = `${d.month}/${d.day}/${d.year}`;
+            let datestring = `${pad(d.month)}/${pad(d.day)}/${d.year}`;
             let date = new Date(datestring);
             let longstring = concatString([ d.firstName, d.lastName, d.department, d.headline, d.pub, d.blurb, d.datestring, d.officer, d.outcome ]);
 

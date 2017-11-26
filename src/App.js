@@ -2,13 +2,10 @@ import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
 
-import { loadData } from './components/DataLoader';
 import CaseGrid from './components/CaseGrid';
 import CityForm from './components/CityForm';
 
 import './App.css';
-
-
 
 const masonryOpts = {
     // stagger?
@@ -26,7 +23,6 @@ export default class App extends React.Component {
             searchText: '',
             // intro: ''
         };
-
     }
 
     componentWillMount() {
@@ -104,6 +100,9 @@ export default class App extends React.Component {
                     handleSearch={this.handleSearch}
                 />
                 <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
+                <div className="container footer">
+                    This is an <a href="https://github.com/camille-s/papb-wall">open source project</a>.
+                </div>
             </div>
         );
     }
