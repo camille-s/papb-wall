@@ -13,10 +13,14 @@
     "node-sass-chokidar": "0.0.3",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.1",
+    "react-bootstrap-typeahead": "^2.0.0",
     "react-dom": "^15.6.1",
+    "react-formstate": "^0.6.10",
     "react-markdown": "^2.5.0",
     "react-masonry-component": "^5.0.7",
     "react-scripts": "1.0.10",
+    "react-search-input": "^0.11.3",
+    "react-select": "^1.0.1",
     "underscore": "^1.8.3"
   },
   "scripts": {

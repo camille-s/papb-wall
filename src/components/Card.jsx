@@ -1,6 +1,7 @@
 import React from 'react';
 import { Col } from 'react-bootstrap';
 import LinkList from './LinkList';
+import TagList from './TagList';
 
 import '../styles/Card.css';
 
@@ -18,6 +19,8 @@ export default class Card extends React.Component {
                 <p className="blurb">{this.props.blurb}</p>
 
                 <LinkList links={this.props.linkset} />
+
+				<TagList tags={this.props.tags} />
             </Col>
         );
     }

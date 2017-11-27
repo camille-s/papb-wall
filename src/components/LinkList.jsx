@@ -6,7 +6,7 @@ const LinkList = function(props) {
         return <li key={key} className="link-li"><a href={d.link} target="_blank">{d.headline} - {d.pub}</a></li>;
     });
     return (
-        <ul>{links}</ul>
+        <ul className="LinkList">{links}</ul>
     );
 };
 

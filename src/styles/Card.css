@@ -5,6 +5,9 @@
     background: #eee;
     color: #333;
     min-height: 320px;
+
+	transform: translateY(100%);
+    animation: slideUp 0.4s ease forwards;
 }
 
 .Card h2 {
@@ -16,13 +19,21 @@
     font-size: 1.4em;
 }
 
-.Card ul {
+.Card ul.LinkList {
     padding-left: 20px;
 }
 
-.Card {
-    transform: translateY(100%);
-    animation: slideUp 0.4s ease forwards;
+.Card ul.TagList {
+	margin: 0;
+}
+
+.Card .TagList li {
+    padding-right: 2px;
+    padding-left: 2px;
+}
+
+.Card .TagList li .label-dark {
+    background-color: #539fd5;
 }
 
 @keyframes slideUp {

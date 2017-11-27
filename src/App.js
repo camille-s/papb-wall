@@ -21,7 +21,7 @@ export default class App extends React.Component {
             city: '',
             order: 'byNewest',
             searchText: '',
-            // intro: ''
+            tags: []
         };
     }
 
@@ -51,38 +51,88 @@ export default class App extends React.Component {
         return sorted;
     }
 
-    filterData(data, city) {
+    filterByCity(data, city) {
         return city.length ? _.filter(data, (d) => d.department === city ) : data;
     }
 
-    sortnFilter(city, order) {
+    filterByTag(data, tags) {
+        return tags.length ? _.filter(data, (d) => _.intersection(d.tags, tags).length === tags.length) : data;
+    }
+
+    sortnFilterCity(city, order) {
         let sorted = this.sortData(this.props.initData, order);
-        let filtered = this.filterData(sorted, city);
+        let filtered = this.filterByCity(sorted, city);
         return filtered;
     }
 
-    handleChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        const city = name === 'city' ? value : this.state.city;
-        const order = name === 'order' ? value : this.state.order;
+    sortnFilterTag(tag, order) {
+        let sorted = this.sortData(this.props.initData, order);
+        let filtered = this.filterByTag(sorted, tag);
+        return filtered;
+    }
 
-        let filtered = this.sortnFilter(city, order);
+    sortnFilter(city, tag, order) {
+        let sorted = this.sortData(this.props.initData, order);
+        let byCity = this.filterByCity(sorted, city);
+        let byTagAndCity = this.filterByTag(byCity, tag);
+        return byTagAndCity;
+    }
 
+    handleOrder = (e) => {
+        let order = e.target.value;
+        let sorted = this.sortData(this.state.data, order);
         this.setState({
-            city: city,
             order: order,
-            data: filtered
+            data: sorted
         });
     }
 
     handleSearch = (e) => {
         const query = e.target.value.toLowerCase();
-        let unfiltered = this.sortnFilter(this.state.city, this.state.order);
+        let unfiltered = this.sortnFilterCity(this.state.city, this.state.order);
+
         let filtered = query.length ? _.filter(unfiltered, (d) => d.longstring.indexOf(query) !== -1) : unfiltered;
+
         this.setState({
             data: filtered
         });
+    }
+
+    handleCity = (option) => {
+        let city = option.value;
+        // let byCity = this.sortnFilterCity(city, this.state.order);
+        let filtered = this.sortnFilter(city, this.state.tags, this.state.order);
+        this.setState({
+            city: city,
+            data: filtered
+        });
+        // const name = e.target.name;
+        // const value = e.target.value;
+        // const city = name === 'city' ? value : this.state.city;
+        // const order = name === 'order' ? value : this.state.order;
+        //
+        // let filtered = this.sortnFilterCity(city, order);
+        //
+        // this.setState({
+        //     city: city,
+        //     order: order,
+        //     data: filtered
+        // });
+    }
+
+    handleTags = (tag) => {
+        // let tagArr = _.pluck(tags, 'label');
+        let tags = _.pluck(tag, 'label');
+        // let unfiltered = this.sortnFilterCity(this.state.city, this.state.order);
+
+        // let filtered = this.filterByTag(unfiltered, _.pluck(tags, 'label'));
+        let filtered = this.sortnFilter(this.state.city, tags, this.state.order);
+
+        this.setState({
+            tags: tags,
+            data: filtered
+        });
+
     }
 
     render() {
@@ -96,8 +146,11 @@ export default class App extends React.Component {
                 <CityForm cities={this.props.cities}
                     city={this.state.city}
                     order={this.state.order}
-                    handleChange={this.handleChange}
+                    tags={this.state.tags}
+                    handleCity={this.handleCity}
+                    handleOrder={this.handleOrder}
                     handleSearch={this.handleSearch}
+                    handleTags={this.handleTags}
                 />
                 <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
                 <div className="container footer">
