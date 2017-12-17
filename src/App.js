@@ -1,6 +1,7 @@
 import React from 'react';
 import * as _ from 'underscore';
 import ReactMarkdown from 'react-markdown';
+import { createFilter } from 'react-search-input';
 
 import CaseGrid from './components/CaseGrid';
 import CityForm from './components/CityForm';
@@ -11,6 +12,7 @@ const masonryOpts = {
     // stagger?
     transitionDuration: 0
 };
+const searchKeys = [ 'firstName', 'lastName', 'department', 'headline', 'pub', 'blurb', 'datestring' ];
 
 export default class App extends React.Component {
     constructor(props) {
@@ -87,19 +89,24 @@ export default class App extends React.Component {
         });
     }
 
-    handleSearch = (e) => {
-        const query = e.target.value.toLowerCase();
-        let unfiltered = this.sortnFilterCity(this.state.city, this.state.order);
-
-        let filtered = query.length ? _.filter(unfiltered, (d) => d.longstring.indexOf(query) !== -1) : unfiltered;
-
-        this.setState({
-            data: filtered
-        });
+    handleSearch = (query) => {
+        // const query = e.target.value.toLowerCase();
+        // let unfiltered = this.sortnFilterCity(this.state.city, this.state.order);
+        //
+        // let filtered = query.length ? _.filter(unfiltered, (d) => d.longstring.indexOf(query) !== -1) : unfiltered;
+        //
+        // this.setState({
+        //     data: filtered
+        // });
+        console.log(query);
+		let filtered = this.state.data.filter(createFilter(query, searchKeys));
+		this.setState({
+			data: filtered
+		});
     }
 
     handleCity = (option) => {
-        let city = option.value;
+        let city = option ? option.value : '';
         // let byCity = this.sortnFilterCity(city, this.state.order);
         let filtered = this.sortnFilter(city, this.state.tags, this.state.order);
         this.setState({
@@ -135,6 +142,10 @@ export default class App extends React.Component {
 
     }
 
+	formChange = (e, val) => {
+		console.log(e, val);
+	};
+
     render() {
         return (
             <div className="App">
@@ -151,6 +162,7 @@ export default class App extends React.Component {
                     handleOrder={this.handleOrder}
                     handleSearch={this.handleSearch}
                     handleTags={this.handleTags}
+					formChange={this.formChange}
                 />
                 <CaseGrid data={this.state.data} masonryOpts={masonryOpts} />
                 <div className="container footer">
