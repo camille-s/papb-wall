@@ -25,9 +25,6 @@ export default class CityForm extends React.Component {
     }
 
     render() {
-        // let options = this.props.cities.map((d) => {
-        //     return <option value={d} key={d}>{d}</option>;
-        // });
         let cities = this.props.cities.map((d) => {
                 return { value: d, label: d };
             });

@@ -139,12 +139,7 @@ export default class App extends React.Component {
             tags: tags,
             data: filtered
         });
-
     }
-
-	formChange = (e, val) => {
-		console.log(e, val);
-	};
 
     render() {
         return (
