@@ -2,15 +2,16 @@
 
 }
 
-.Entry div.meta.dept-header {
-    color: #666 !important;
-    font-size: 1.2em !important;
-    font-weight: 600;
+.Entry div.dept-header {
+    /* color: #666 !important; */
+    /* font-size: 1.2em !important; */
+    margin: 8px 0;
 }
 
-.Entry div.header.name-header span {
-    font-family: 'Fira Sans';
-    font-size: 1.35em;
+.Entry div.header.name-header {
+    /* font-family: 'Fira Sans'; */
+    /* font-size: 1.35em; */
+    margin: 6px 0;
 }
 
 .Entry .LinkList {
