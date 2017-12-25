@@ -1,32 +1,18 @@
 import React from 'react';
-import Masonry from 'react-masonry-component';
-import * as _ from 'underscore';
+// import Masonry from 'react-masonry-component';
+import { Card } from 'semantic-ui-react';
+import Entry from './Entry';
 
-import { Grid } from 'react-bootstrap';
-import Card from './Card';
+import '../styles/CaseGrid.css';
 
-export default class CaseGrid extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            cards: []
-        };
-    }
+const CaseGrid = (props) => (
+    <div className="CaseGrid">
+        <Card.Group>
+            {props.data.map((d, i) => (
+                <Entry key={d.lastName + ' ' + d.firstName} {...d} />
+            ))}
+        </Card.Group>
+    </div>
+);
 
-    makeCards(data) {
-        let cards = _.map(data, (d) => <Card key={d.lastName + ' ' + d.firstName} {...d} />);
-        this.setState({ cards: cards });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.makeCards(nextProps.data);
-    }
-
-    render() {
-        return (
-            <Grid>
-                <Masonry options={this.props.masonryOpts} className="case-grid">{this.state.cards}</Masonry>
-            </Grid>
-        );
-    }
-}
+export default CaseGrid;

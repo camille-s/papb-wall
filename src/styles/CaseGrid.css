@@ -13,3 +13,11 @@
 .CaseGrid .masonry-col > div {
     margin-bottom: 20px;
 }*/
+
+.CaseGrid {
+	margin: 20px auto;
+}
+
+.CaseGrid div.cards {
+	margin: 10px auto;
+}

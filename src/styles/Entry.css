@@ -1,0 +1,18 @@
+.Entry {
+
+}
+
+.Entry div.meta.dept-header {
+    color: #666 !important;
+    font-size: 1.2em !important;
+    font-weight: 600;
+}
+
+.Entry div.header.name-header span {
+    font-family: 'Fira Sans';
+    font-size: 1.35em;
+}
+
+.Entry .LinkList {
+    padding-left: 0.3rem !important;
+}

@@ -59,8 +59,8 @@ const cleanData = (data) => {
 			let longstring = concatString([ d.firstName, d.lastName, d.department, d.headline, d.pub, d.blurb, d.datestring, d.officer, d.outcome, tags.join(' ') ]);
 
             return {
-                firstName: d.firstName,
-                lastName: d.lastName,
+                firstName: d.firstName.trim(),
+                lastName: d.lastName.trim(),
                 age: d.age,
                 datestring: datestring,
                 date: date,
