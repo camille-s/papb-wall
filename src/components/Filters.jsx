@@ -14,13 +14,18 @@ export default class Filters extends React.Component {
 			return { key: d, value: d, text: d };
 		});
 
+		let officers = this.props.officers.map((d) => {
+			return { key: d, value: d, text: d };
+		});
+		officers.unshift({ key: 'all', value: 'all', text: 'Show all' });
+
         return (
 			<div className="Filters">
 				<Form>
 					<Form.Field>
 						<label htmlFor="search">Search cases</label>
 						{/* <SearchInput className="" onChange={this.props.handleSearch} /> */}
-						<Input name="query" onChange={this.props.handleSearch} placeholder="Search" icon="search" iconPosition="left" />
+						<Input name="query" onChange={this.props.handleSearch} placeholder="Search" label={{ icon: 'search'}} labelPosition="left" />
 					</Form.Field>
 					<Form.Field>
 						<label htmlFor="city">Filter by department</label>
@@ -30,6 +35,10 @@ export default class Filters extends React.Component {
 						<label htmlFor="tags">Filter by tag</label>
 						<Dropdown name="tags" className="icon" options={tags} value={this.props.tags} onChange={this.props.handleChange} button floating labeled selection multiple placeholder=" " icon="tags" />
 					</Form.Field>
+					{/* <Form.Field>
+						<label htmlFor="officer">Filter by officer</label>
+						<Dropdown name="officer" className="icon" options={officers} value={this.props.officer} onChange={this.props.handleChange} button floating labeled selection icon="id badge" placeholder="Show all" />
+					</Form.Field> */}
 
 					<Form.Group inline>
 						<label htmlFor="order">Sort by</label>

@@ -21,7 +21,8 @@ export default class App extends React.Component {
             city: 'all',
             order: 'byNewest',
             searchText: '',
-            tags: []
+            tags: [],
+            officer: 'all'
         };
     }
 
@@ -51,11 +52,16 @@ export default class App extends React.Component {
         return tags.length ? _.filter(data, (d) => _.intersection(d.tags, tags).length === tags.length) : data;
     }
 
-    sortnFilter({ city, tags, order }) {
+    filterByOfficer(data, officer) {
+        return officer !== 'all' ? _.filter(data, (d) => _.contains(d.officers, officer)) : data;
+    }
+
+    sortnFilter({ city, tags, officer, order }) {
         let sorted = this.sortData(this.props.initData, order);
         let byCity = this.filterByCity(sorted, city);
-        let byTagAndCity = this.filterByTag(byCity, tags);
-        return byTagAndCity;
+        let byTag = this.filterByTag(byCity, tags);
+        let byOfficer = this.filterByOfficer(byTag, officer);
+        return byOfficer;
     }
 
     handleSearch = (e) => {
@@ -70,9 +76,8 @@ export default class App extends React.Component {
     }
 
     formChange = (e, { name, value }) => {
-        // this.setState({ [name]: value });
-        let { city, tags, order } = this.state;
-        let opts = { city, tags, order };
+        let { city, tags, officer, order } = this.state;
+        let opts = { city, tags, officer, order };
         let data = this.sortnFilter({ ...opts, [name]: value });
 
         this.setState({
@@ -82,7 +87,8 @@ export default class App extends React.Component {
     };
 
     render() {
-        // console.log(this.state.data);
+        console.log(this.state);
+        let caseStr = this.state.data.length === 1 ? 'case' : 'cases';
         return (
             <div className="App">
 				<Container>
@@ -96,11 +102,12 @@ export default class App extends React.Component {
                             handleChange={this.formChange}
                             handleSearch={this.handleSearch}
                             cities={this.props.cities}
+                            officers={this.props.officers}
                             city={this.state.city}
                             order={this.state.order}
                             tags={this.state.tags}
                         />
-                        <Message color="teal" compact>Currently viewing <span className="count">{this.state.data.length}</span> cases</Message>
+                        <Message color="teal" compact>Currently viewing <span className="count">{this.state.data.length}</span> {caseStr}</Message>
                     </Segment>
                 </Container>
                 <Container>

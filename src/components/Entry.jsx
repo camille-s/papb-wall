@@ -24,30 +24,18 @@ export default class Entry extends React.Component {
     render() {
         let name = <span>{this.props.firstName} {this.props.lastName}</span>;
         let age = this.props.age.length ? `, ${this.props.age}` : '';
+		let officers = this.props.officers;
+		let officerStr = officers.length === 1 ? 'Officer:' : 'Officers:';
+		let officerHeader = officers.length ? <Header size="small" color="grey" className="dept-header officer-header">{officerStr} {officers.join(', ')}</Header> : <span></span>;
 
         return (
-
-			// <Card className="Entry" centered>
-			// 	<Card.Content>
-			// 		<Card.Header className="name-header">{name}<span>{age}</span></Card.Header>
-			// 		<Card.Meta className="dept-header" >{this.props.department.toUpperCase()} | {this.props.datestring}</Card.Meta>
-            //
-			// 		<Divider />
-			// 		<Card.Description>{this.props.blurb}</Card.Description>
-            //
-			// 		<LinkList links={this.props.linkset} />
-            //
-			// 	</Card.Content>
-			// 	<Card.Content extra>
-			// 		<TagList tags={this.props.tags} />
-			// 	</Card.Content>
-			// </Card>
 			<Grid.Column>
 				<Segment className="Entry">
 					<Header size="large" className="name-header">{name}<span>{age}</span></Header>
 					<Header size="medium" color="grey" className="dept-header">
 						{this.props.department.toUpperCase()} | {this.props.datestring}
 					</Header>
+					{officerHeader}
 
 					<Divider />
 					<div>{this.props.blurb}</div>
